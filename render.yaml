@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: rahul-mart
+    runtime: docker
+    plan: starter          # persistent disk needs a paid plan
+    healthCheckPath: /api/health
+    disk:
+      name: rahul-mart-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_FILE
+        value: /data/rahul-mart.sqlite
+      - key: JWT_SECRET
+        generateValue: true     # 32+ bytes random
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false             # you type it in the Render dashboard
